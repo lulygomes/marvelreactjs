@@ -1,4 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import {
+  FiUser, FiBookOpen, FiUsers, FiBookmark, FiFilm, FiBook,
+} from 'react-icons/fi';
 
 import logoMarvel from '../../assets/MarvelLogo.svg';
 
@@ -9,12 +13,36 @@ const Header: React.FC = () => (
     <img src={logoMarvel} alt="Marvel" />
 
     <div>
-      <a href="#">Characters</a>
-      <a href="#">Comics</a>
-      <a href="#">Creators</a>
-      <a href="#">Events</a>
-      <a href="#">Series</a>
-      <a href="#">Stories</a>
+      <a href="#">
+        <FiUser />
+        Characters
+      </a>
+
+      <a href="#">
+        <FiBookOpen />
+        Comics
+      </a>
+
+      <a href="#">
+        <FiUsers />
+        Creators
+      </a>
+
+      <a href="#">
+        <FiBookmark />
+        Events
+      </a>
+
+      <a href="#">
+        <FiFilm />
+        Series
+      </a>
+
+      <a href="#">
+        <FiBook />
+        Stories
+      </a>
+
     </div>
   </Container>
 );

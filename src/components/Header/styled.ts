@@ -4,7 +4,6 @@ export const Container = styled.header`
   background: #ec1d24;
   height: 80px;
   width: 100%;
-  border-radius: 8px 8px 0 0 ;
   display: flex;
   align-items: center;
 
@@ -13,8 +12,17 @@ export const Container = styled.header`
       margin-right: 5px;
     }
 
+    div {
+      display: flex;
+    flex-direction: row;
 
-  div > a {
+    }
+
+
+  a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     text-decoration: none;
     color: #000;
     background: #fefefe;
@@ -23,5 +31,12 @@ export const Container = styled.header`
     padding: 10px 10px;
     border-radius: 5px;
     font-weight: 700;
+
+    svg {
+      margin-right: 5px;
+      color: #000;
+    }
+
   }
+
 `;
