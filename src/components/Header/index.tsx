@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   FiHeart,
   FiUser,
@@ -8,7 +9,6 @@ import {
   FiBookmark,
   FiFilm,
   FiBook,
-  FiGithub,
 } from 'react-icons/fi';
 
 import logoMarvel from '../../assets/MarvelLogo.svg';
@@ -20,35 +20,35 @@ const Header: React.FC = () => (
     <img src={logoMarvel} alt="Marvel" />
 
     <div>
-      <a href="#">
+      <Link to="/characters">
         <FiUser />
         Characters
-      </a>
+      </Link>
 
-      <a href="#">
+      <Link to="/comics">
         <FiBookOpen />
         Comics
-      </a>
+      </Link>
 
-      <a href="#">
+      <Link to="/creators">
         <FiUsers />
         Creators
-      </a>
+      </Link>
 
-      <a href="#">
+      <Link to="/events">
         <FiBookmark />
         Events
-      </a>
+      </Link>
 
-      <a href="#">
+      <Link to="/series">
         <FiFilm />
         Series
-      </a>
+      </Link>
 
-      <a href="#">
+      <Link to="/stories">
         <FiBook />
         Stories
-      </a>
+      </Link>
 
     </div>
     <DevDiv>
