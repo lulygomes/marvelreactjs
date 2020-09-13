@@ -6,6 +6,7 @@ export const Container = styled.header`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
     img {
       height: 80px;
@@ -39,4 +40,19 @@ export const Container = styled.header`
 
   }
 
+`;
+
+export const DevDiv = styled.div`
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  a {
+    background: transparent;
+    width: 80px;
+  }
+
+  img {
+    border-radius: 50%;
+  }
 `;
