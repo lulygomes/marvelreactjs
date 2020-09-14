@@ -32,6 +32,7 @@ export const Container = styled.header`
     padding: 10px 10px;
     border-radius: 5px;
     font-weight: 700;
+    box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.3);
 
     svg {
       margin-right: 5px;
@@ -53,9 +54,12 @@ export const DevDiv = styled.div`
   a {
     background: transparent;
     width: 80px;
+    box-shadow: none;
   }
 
   img {
     border-radius: 50%;
+    box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.3);
+
   }
 `;
