@@ -28,8 +28,10 @@ const Characters: React.FC = () => {
     async function getCharacters(): Promise<void> {
       try {
         const response = await api.get(`characters?${authKey}`);
+        console.log('resposta da api', response);
 
         setCharacters(response.data.data.results);
+        console.log('var Characters', characters);
       } catch (err) {
         console.log(err);
       }
