@@ -23,6 +23,14 @@ export const Card = styled.div`
   overflow: hidden;
   box-shadow:2px 2px 10px 1px rgba(0,0,0,0.3);
 
+  h2{
+    margin: 10px 0 5px 5px;
+  }
+  p{
+    margin: 5px;
+    text-align: justify;
+  }
+
 `;
 
 export const Img = styled.div<ThumbnailDTO>`
@@ -30,4 +38,27 @@ export const Img = styled.div<ThumbnailDTO>`
   width: 100%;
   background: url(${(props) => `${props.thumbnail.path}.${props.thumbnail.extension}`} ) no-repeat center;
   background-size: cover;
+`;
+
+export const ButtonMore = styled.div`
+  background: #f1f1f1;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  box-shadow:2px 2px 10px 1px rgba(0,0,0,0.3);
+  margin: 20px 100px;
+  padding: 0 50px;
+  border-radius: 5px;
+  transition: background 0.3s;
+
+
+  &:hover{
+    background: #ec1d24;
+  }
+
+  /* svg {
+    margin-right: 10px;
+  } */
 `;

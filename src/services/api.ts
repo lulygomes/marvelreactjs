@@ -7,7 +7,7 @@ const privateKey = 'add4f251016adaba623248d0f79c58e8362ee2fe';
 const time = Number(new Date());
 const hash = md5(time + privateKey + publicKey);
 
-export const authKey = `?ts=${time}&apikey=${publicKey}&hash=${hash}`;
+export const authKey = `&ts=${time}&apikey=${publicKey}&hash=${hash}`;
 
 const api = axios.create({
   baseURL: 'http://gateway.marvel.com/v1/public/',

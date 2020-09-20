@@ -24,7 +24,7 @@ const Stories: React.FC = () => {
 
   useEffect(() => {
     async function getStories(): Promise<void> {
-      const response = await api.get(`stories${authKey}`);
+      const response = await api.get(`stories?${authKey}`);
       console.log(response.data.data.results);
 
       setStories(response.data.data.results);

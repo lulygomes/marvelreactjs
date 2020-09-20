@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FiChevronsDown } from 'react-icons/fi';
+
 import api, { authKey } from '../../services/api';
 
-import { Container, Card, Img } from './styles';
+import {
+  Container, Card, Img, ButtonMore,
+} from './styles';
 
-interface CharactersDTO{
+interface CharactersDTO {
   id: number;
   name: string;
   description: string;
@@ -22,9 +26,7 @@ const Characters: React.FC = () => {
 
   useEffect(() => {
     async function getCharacters(): Promise<void> {
-      console.log(`characters${authKey}`);
-      const response = await api.get(`characters${authKey}`);
-      console.log(response.data.data.results);
+      const response = await api.get(`characters?${authKey}`);
 
       setCharacters(response.data.data.results);
     }
@@ -32,16 +34,36 @@ const Characters: React.FC = () => {
     getCharacters();
   }, []);
 
+  const handleMore = useCallback(async () => {
+    try {
+      const offset = characters.length;
+      console.log('offset', offset);
+      const response = await api.get(`characters?offset=${offset}${authKey}`);
+      console.log('response', response);
+
+      setCharacters([...characters, ...response.data.data.results]);
+    } catch (err) {
+      console.log('erro', err);
+    }
+  }, [characters]);
+
   return (
-    <Container>
-      {characters.map((character) => (
-        <Card key={character.id}>
-          <Img thumbnail={character.thumbnail} />
-          <h2>{character.name}</h2>
-          <p>{character.description}</p>
-        </Card>
-      ))}
-    </Container>
+    <>
+      <Container>
+        {characters.map((character) => (
+          <Card key={character.id}>
+            <Img thumbnail={character.thumbnail} />
+            <h2>{character.name}</h2>
+            <p>{character.description}</p>
+          </Card>
+        ))}
+      </Container>
+      <ButtonMore onClick={handleMore}>
+        <FiChevronsDown size={30} />
+        Mais
+        <FiChevronsDown size={30} />
+      </ButtonMore>
+    </>
   );
 };
 

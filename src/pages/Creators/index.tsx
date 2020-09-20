@@ -24,7 +24,7 @@ const Creators: React.FC = () => {
 
   useEffect(() => {
     async function getCreators(): Promise<void> {
-      const response = await api.get(`creators${authKey}`);
+      const response = await api.get(`creators?${authKey}`);
       console.log(response.data.data.results);
 
       setCreators(response.data.data.results);

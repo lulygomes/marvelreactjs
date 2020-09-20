@@ -24,7 +24,7 @@ const Comics: React.FC = () => {
 
   useEffect(() => {
     async function getComics(): Promise<void> {
-      const response = await api.get(`comics${authKey}`);
+      const response = await api.get(`comics?${authKey}`);
       console.log(response.data.data.results);
 
       setComics(response.data.data.results);

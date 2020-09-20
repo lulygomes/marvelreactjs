@@ -24,7 +24,7 @@ const Series: React.FC = () => {
 
   useEffect(() => {
     async function getSeries(): Promise<void> {
-      const response = await api.get(`series${authKey}`);
+      const response = await api.get(`series?${authKey}`);
       console.log(response.data.data.results);
 
       setSeries(response.data.data.results);

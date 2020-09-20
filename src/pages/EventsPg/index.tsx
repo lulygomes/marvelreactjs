@@ -24,7 +24,7 @@ const Events: React.FC = () => {
 
   useEffect(() => {
     async function getEvents(): Promise<void> {
-      const response = await api.get(`events${authKey}`);
+      const response = await api.get(`events?${authKey}`);
       console.log(response.data.data.results);
 
       setEvents(response.data.data.results);
