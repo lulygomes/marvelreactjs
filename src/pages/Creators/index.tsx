@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FiChevronsDown } from 'react-icons/fi';
 import api, { authKey } from '../../services/api';
 
-import { Container, Card } from './styles';
+import { Container, Card, ButtonMore } from './styles';
 
-interface ThumbnailDTO{
+interface ThumbnailDTO {
   path: string;
   extension: string;
 }
 
-interface CreatorsDTO{
+interface CreatorsDTO {
   id: number;
   fullName: string;
   description: string;
@@ -33,16 +34,34 @@ const Creators: React.FC = () => {
     getCreators();
   }, []);
 
+  const handleMore = useCallback(async () => {
+    try {
+      const offset = creators.length;
+      const response = await api.get(`creators?offset=${offset}${authKey}`);
+
+      setCreators([...creators, ...response.data.data.results]);
+    } catch (err) {
+      console.log('erro', err);
+    }
+  }, [creators]);
+
   return (
-    <Container>
-      {creators.map((creator) => (
-        <Card key={creator.id}>
-          <img src={`${creator.thumbnail.path}.${creator.thumbnail.extension}`} alt={creator.fullName} />
-          <h2>{creator.fullName}</h2>
-          <p>{creator.description}</p>
-        </Card>
-      ))}
-    </Container>
+    <>
+      <Container>
+        {creators.map((creator) => (
+          <Card key={creator.id}>
+            <img src={`${creator.thumbnail.path}.${creator.thumbnail.extension}`} alt={creator.fullName} />
+            <h2>{creator.fullName}</h2>
+            <p>{creator.description}</p>
+          </Card>
+        ))}
+      </Container>
+      <ButtonMore onClick={handleMore}>
+        <FiChevronsDown size={30} />
+        Mais
+        <FiChevronsDown size={30} />
+      </ButtonMore>
+    </>
   );
 };
 

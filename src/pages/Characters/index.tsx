@@ -27,15 +27,11 @@ const Characters: React.FC = () => {
   useEffect(() => {
     async function getCharacters(): Promise<void> {
       try {
-        console.log(api);
         const response = await api.get(`characters?${authKey}`);
-        console.log('resposta da api', response);
 
         setCharacters(response.data.data.results);
-        console.log('var Characters', characters);
       } catch (err) {
         console.log(err);
-        console.log('message', err.message);
       }
     }
 
@@ -45,9 +41,7 @@ const Characters: React.FC = () => {
   const handleMore = useCallback(async () => {
     try {
       const offset = characters.length;
-      console.log('offset', offset);
       const response = await api.get(`characters?offset=${offset}${authKey}`);
-      console.log('response', response);
 
       setCharacters([...characters, ...response.data.data.results]);
     } catch (err) {
