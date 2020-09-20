@@ -27,7 +27,7 @@ const Characters: React.FC = () => {
   useEffect(() => {
     async function getCharacters(): Promise<void> {
       try {
-        console.log(api.get(`characters?${authKey}`));
+        console.log(api);
         const response = await api.get(`characters?${authKey}`);
         console.log('resposta da api', response);
 
@@ -35,6 +35,7 @@ const Characters: React.FC = () => {
         console.log('var Characters', characters);
       } catch (err) {
         console.log(err);
+        console.log('message', err.message);
       }
     }
 
