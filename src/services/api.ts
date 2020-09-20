@@ -7,6 +7,7 @@ const privateKey = process.env.REACT_APP_PRIVATE_KEY;
 const time = Number(new Date());
 
 const hash = publicKey && privateKey ? md5(time + privateKey + publicKey) : '';
+console.log(hash);
 
 export const authKey = `&ts=${time}&apikey=${publicKey}&hash=${hash}`;
 
