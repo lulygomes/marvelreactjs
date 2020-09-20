@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import api, { authKey } from '../../services/api';
 
-import { Container, Card } from './styles';
-
-interface ThumbnailDTO{
-  path: string;
-  extension: string;
-}
+import { Container, Card, Img } from './styles';
 
 interface CharactersDTO{
   id: number;
   name: string;
   description: string;
-  thumbnail: ThumbnailDTO;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
   comics: string[];
   stories: string[];
   events: string[];
@@ -38,7 +36,7 @@ const Characters: React.FC = () => {
     <Container>
       {characters.map((character) => (
         <Card key={character.id}>
-          <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt={character.name} />
+          <Img thumbnail={character.thumbnail} />
           <h2>{character.name}</h2>
           <p>{character.description}</p>
         </Card>
