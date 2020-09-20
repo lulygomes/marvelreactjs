@@ -33,10 +33,12 @@ export const Card = styled.div`
 
 `;
 
-export const Img = styled.div<ThumbnailDTO>`
+const urlImg = (props: ThumbnailDTO) => `${props.thumbnail.path}.${props.thumbnail.extension}`;
+
+export const Img = styled.div`
   height: 200px;
   width: 100%;
-  background: url(${(props) => `${props.thumbnail.path}.${props.thumbnail.extension}`} ) no-repeat center;
+  background: url(${urlImg}) no-repeat center;
   background-size: cover;
 `;
 
@@ -57,8 +59,4 @@ export const ButtonMore = styled.div`
   &:hover{
     background: #ec1d24;
   }
-
-  /* svg {
-    margin-right: 10px;
-  } */
 `;

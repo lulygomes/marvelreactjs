@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FiChevronsDown } from 'react-icons/fi';
+
 import api, { authKey } from '../../services/api';
 
-import { Container, Card } from './styles';
+import { Container, Card, ButtonMore } from './styles';
 
-interface ThumbnailDTO{
-  path: string;
-  extension: string;
-}
-
-interface ComicsDTO{
+interface ComicsDTO {
   id: number;
   title: string;
   description: string;
-  thumbnail: ThumbnailDTO;
+  thumbnail: {
+    path: string;
+    extension: string;};
   comics: string[];
   stories: string[];
   events: string[];
@@ -33,16 +32,33 @@ const Comics: React.FC = () => {
     getComics();
   }, []);
 
+  const handleMore = useCallback(async () => {
+    try {
+      const offset = comics.length;
+      const response = await api.get(`comics?offset=${offset}${authKey}`);
+
+      setComics([...comics, ...response.data.data.results]);
+    } catch (err) {
+      console.log('erro', err);
+    }
+  }, [comics]);
+
   return (
-    <Container>
-      {comics.map((comic) => (
-        <Card key={comic.id}>
-          <img src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title} />
-          <h2>{comic.title}</h2>
-          <p>{comic.description}</p>
-        </Card>
-      ))}
-    </Container>
+    <>
+      <Container>
+        {comics.map((comic) => (
+          <Card key={comic.id} thumbnail={comic.thumbnail}>
+            <h2>{comic.title}</h2>
+            <p>{comic.description}</p>
+          </Card>
+        ))}
+      </Container>
+      <ButtonMore onClick={handleMore}>
+        <FiChevronsDown size={30} />
+        Mais
+        <FiChevronsDown size={30} />
+      </ButtonMore>
+    </>
   );
 };
 
