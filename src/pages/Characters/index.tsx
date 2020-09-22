@@ -4,8 +4,14 @@ import { FiChevronsDown } from 'react-icons/fi';
 import api, { authKey } from '../../services/api';
 
 import {
-  Container, Card, Img, ButtonMore,
+  Container, Card, ButtonMore,
 } from './styles';
+
+interface ComicsDTO {
+  items: {
+    name:string;
+  }[]
+}
 
 interface CharactersDTO {
   id: number;
@@ -15,7 +21,11 @@ interface CharactersDTO {
     path: string;
     extension: string;
   };
-  comics: string[];
+  comics: {
+    items: {
+      name: string;
+    }[];
+  };
   stories: string[];
   events: string[];
   series: string[];
@@ -48,15 +58,20 @@ const Characters: React.FC = () => {
       console.log('erro', err);
     }
   }, [characters]);
+  console.log(characters);
 
   return (
     <>
       <Container>
         {characters.map((character) => (
-          <Card key={character.id}>
-            <Img thumbnail={character.thumbnail} />
+          <Card key={character.id} thumbnail={character.thumbnail}>
+            <div id="img" />
             <h2>{character.name}</h2>
             <p>{character.description}</p>
+            { character.comics.items.length > 0 ? <h3>Comics: </h3> : ''}
+            { character.comics.items.map((comic) => (
+              <p key={comic.name}>{comic.name}</p>
+            ))}
           </Card>
         ))}
       </Container>

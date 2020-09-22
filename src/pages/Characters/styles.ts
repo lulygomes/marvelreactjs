@@ -14,6 +14,8 @@ export const Container = styled.div`
   align-content: start;
 `;
 
+const urlImg = (props: ThumbnailDTO) => `${props.thumbnail.path}.${props.thumbnail.extension}`;
+
 export const Card = styled.div`
   background: #f1f1f1;
   height: 450px;
@@ -23,17 +25,27 @@ export const Card = styled.div`
   overflow: hidden;
   box-shadow:2px 2px 10px 1px rgba(0,0,0,0.3);
 
-  h2{
-    margin: 10px 0 5px 5px;
-  }
-  p{
-    margin: 5px;
+  h2, p {
+    padding: 5px;
     text-align: justify;
   }
 
-`;
+  div#img {
+  height: 400px;
+  width: 100%;
+  background: url(${urlImg}) no-repeat center;
+  background-size: cover;
+  transition: height 1s;
+  }
 
-const urlImg = (props: ThumbnailDTO) => `${props.thumbnail.path}.${props.thumbnail.extension}`;
+  &:hover {
+    div#img{
+    height: 100px;
+    }
+  }
+
+
+`;
 
 export const Img = styled.div`
   height: 200px;
