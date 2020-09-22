@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FiChevronsDown } from 'react-icons/fi';
 import api, { authKey } from '../../services/api';
 
-import { Container, Card } from './styles';
+import { Container, Card, ButtonMore } from './styles';
 
-interface ThumbnailDTO{
+interface ThumbnailDTO {
   path: string;
   extension: string;
 }
 
-interface SeriesDTO{
+interface SeriesDTO {
   id: number;
   title: string;
   description: string;
@@ -33,16 +34,34 @@ const Series: React.FC = () => {
     getSeries();
   }, []);
 
+  const handleMore = useCallback(async () => {
+    try {
+      const offset = series.length;
+      const response = await api.get(`series?offset=${offset}${authKey}`);
+
+      setSeries([...series, ...response.data.data.results]);
+    } catch (err) {
+      console.log('erro', err);
+    }
+  }, [series]);
+
   return (
-    <Container>
-      {series.map((serie) => (
-        <Card key={serie.id}>
-          <img src={`${serie.thumbnail.path}.${serie.thumbnail.extension}`} alt={serie.title} />
-          <h2>{serie.title}</h2>
-          <p>{serie.description}</p>
-        </Card>
-      ))}
-    </Container>
+    <>
+      <Container>
+        {series.map((serie) => (
+          <Card key={serie.id} thumbnail={serie.thumbnail}>
+            <div id="img" />
+            <h2>{serie.title}</h2>
+            <p>{serie.description}</p>
+          </Card>
+        ))}
+      </Container>
+      <ButtonMore onClick={handleMore}>
+        <FiChevronsDown size={30} />
+        Mais
+        <FiChevronsDown size={30} />
+      </ButtonMore>
+    </>
   );
 };
 

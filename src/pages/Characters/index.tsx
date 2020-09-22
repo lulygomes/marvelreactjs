@@ -58,7 +58,6 @@ const Characters: React.FC = () => {
       console.log('erro', err);
     }
   }, [characters]);
-  console.log(characters);
 
   return (
     <>
