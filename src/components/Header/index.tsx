@@ -11,7 +11,7 @@ import {
   FiBook,
 } from 'react-icons/fi';
 
-import logoMarvel from '../../assets/MarvelLogo.svg';
+import logoMarvel from '../../assets/MarvelLogo1.svg';
 
 import { Container, DevDiv } from './styled';
 
