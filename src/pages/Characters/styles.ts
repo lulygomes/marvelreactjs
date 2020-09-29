@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ThumbnailDTO{
   thumbnail: {
@@ -6,6 +6,55 @@ interface ThumbnailDTO{
     extension: string;
   }
 }
+
+interface InputLabelProps{
+  isFocused: boolean;
+  isFilled: boolean;
+}
+
+export const InputLabel = styled.div<InputLabelProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  margin: 0 auto;
+  width: 100%;
+
+
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    box-shadow:2px 2px 10px 1px rgba(0,0,0,0.3);
+    padding: 0 10px;
+    border-radius: 10px;
+
+    ${(props) => props.isFocused && css`
+      border: 1px solid;
+      background: #ed1d24;
+      `
+}
+
+    input {
+      border: none;
+      background:transparent;
+      margin: 10px;
+    }
+
+  }
+
+  svg#enter {
+    margin: 5px;
+    width: 26px;
+    height: 26px;
+    padding: 3px;
+    border-radius: 5px;
+    background: #f1f1f1;
+    cursor: pointer;
+  }
+
+`;
 
 export const Container = styled.div`
   display: flex;

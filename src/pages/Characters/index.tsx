@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FiChevronsDown } from 'react-icons/fi';
+import { FiChevronsDown, FiSearch, FiCornerDownLeft } from 'react-icons/fi';
 
 import api, { authKey } from '../../services/api';
 
 import {
-  Container, Card, ButtonMore,
+  Container, Card, ButtonMore, InputLabel,
 } from './styles';
 
 interface ComicsDTO {
@@ -32,6 +32,9 @@ interface CharactersDTO {
 }
 
 const Characters: React.FC = () => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+
   const [characters, setCharacters] = useState<CharactersDTO[]>([]);
 
   useEffect(() => {
@@ -61,6 +64,17 @@ const Characters: React.FC = () => {
 
   return (
     <>
+      <InputLabel isFocused={isFocused} isFilled={isFilled}>
+        <label
+          htmlFor="input"
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        >
+          <FiSearch />
+          <input id="input" type="text" />
+          <FiCornerDownLeft id="enter" onClick={() => console.log('foi')} />
+        </label>
+      </InputLabel>
       <Container>
         {characters.map((character) => (
           <Card key={character.id} thumbnail={character.thumbnail}>
