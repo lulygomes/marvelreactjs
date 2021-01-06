@@ -56,7 +56,11 @@ const Characters: React.FC = () => {
   const handleMore = useCallback(async () => {
     try {
       const offset = characters.length;
-      const response = await api.get(`characters?offset=${offset}${authKey}`);
+      const response = await api.get(`characters?${authKey}`, {
+        params: {
+          offset,
+        },
+      });
 
       setCharacters([...characters, ...response.data.data.results]);
     } catch (err) {
