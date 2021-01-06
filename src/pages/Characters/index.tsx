@@ -76,6 +76,7 @@ const Characters: React.FC = () => {
         },
       });
       setCharacters([...response.data.data.results, ...characters]);
+      setSeach('');
     } catch (err) {
       console.log(err);
     }
