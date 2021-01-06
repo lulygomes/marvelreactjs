@@ -35,6 +35,8 @@ const Characters: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
+  const [seach, setSeach] = useState('');
+
   const [characters, setCharacters] = useState<CharactersDTO[]>([]);
 
   useEffect(() => {
@@ -62,6 +64,19 @@ const Characters: React.FC = () => {
     }
   }, [characters]);
 
+  const handleSeach = useCallback(async () => {
+    try {
+      const response = await api.get(`characters?${authKey}`, {
+        params: {
+          name: seach,
+        },
+      });
+      setCharacters([...response.data.data.results, ...characters]);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [seach, characters]);
+
   return (
     <>
       <InputLabel isFocused={isFocused} isFilled={isFilled}>
@@ -71,10 +86,18 @@ const Characters: React.FC = () => {
           onBlur={() => setIsFocused(false)}
         >
           <FiSearch />
-          <input id="input" type="text" />
-          <FiCornerDownLeft id="enter" onClick={() => console.log('foi')} />
+          <input
+            id="input"
+            type="text"
+            placeholder="Nome do personagem"
+            value={seach}
+            onChange={(event) => setSeach(event.target.value)}
+            onKeyDown={(e) => (e.key === 'Enter' ? handleSeach() : '')}
+          />
+          <FiCornerDownLeft id="enter" onClick={handleSeach} />
         </label>
       </InputLabel>
+
       <Container>
         {characters.map((character) => (
           <Card key={character.id} thumbnail={character.thumbnail}>
