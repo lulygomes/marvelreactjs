@@ -90,10 +90,30 @@ const Characters: React.FC = () => {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         >
+          <datalist id="marvelsearch">
+            <option>Black Panther</option>
+            <option>Black Widow</option>
+            <option>Captain America</option>
+            <option>Doctor Strange</option>
+            <option>Drax</option>
+            <option>Falcon</option>
+            <option>Gamora</option>
+            <option>Groot</option>
+            <option>Hulk</option>
+            <option>Iron Man</option>
+            <option>Loki</option>
+            <option>Nebula</option>
+            <option>Wanda Maximoff</option>
+            <option>Spider-man</option>
+            <option>Thanos</option>
+            <option>Thor</option>
+            <option>Vision</option>
+          </datalist>
           <FiSearch />
           <input
             id="input"
-            type="text"
+            type="search"
+            list="marvelsearch"
             placeholder="Nome do personagem"
             value={seach}
             onChange={(event) => setSeach(event.target.value)}
